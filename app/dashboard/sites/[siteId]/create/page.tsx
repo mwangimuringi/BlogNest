@@ -26,6 +26,7 @@ import { useState } from "react";
 import { useFormState } from "react-dom";
 import { toast } from "sonner";
 import slugify from "react-slugify";
+import { SubmitButton } from "@/app/components/dashboard/SubmitButtons";
 export default function ArticleCreationRoute({
   params,
 }: {
@@ -89,6 +90,7 @@ export default function ArticleCreationRoute({
             onSubmit={form.onSubmit}
             action={action}
           >
+            <input type="hidden" name="siteId" value={params.siteId} />
             <div className="grid gap-2">
               <Label>Title</Label>
               <Input
@@ -117,7 +119,7 @@ export default function ArticleCreationRoute({
               </Button>
               <p className="text-red-500 text-sm">{fields.slug.errors}</p>
             </div>
-            
+
             <div className="grid gap-2">
               <Label>Small Description</Label>
               <Textarea
@@ -178,6 +180,7 @@ export default function ArticleCreationRoute({
                 {fields.articleContent.errors}
               </p>
             </div>
+            <SubmitButton text="Create Article" />
           </form>
         </CardContent>
       </Card>
