@@ -24,6 +24,7 @@ model User {
   createaAt DateTime @default(now())
 
   site Site[] 
+   posts  Post[]
 }
 
 model Site {
@@ -38,5 +39,25 @@ model Site {
 
   User User?  @relation(fields: [userId], references: [id])
   userId   String?
+  posts  Post[]
 }
+
+
+model Post {
+  id String @id @default(uuid())
+
+  title            String
+  articleContent   Json
+  smallDescription String
+  image            String
+  slug             String @unique
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  User      User?    @relation(fields: [userId], references: [id])
+  userId    String?
+  Site      Site?    @relation(fields: [siteId], references: [id], onDelete: Cascade)
+  siteId    String?
+}
+
 

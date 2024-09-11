@@ -13,7 +13,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import Defaultimage from "@/public/default.png";
-import { EmptyState } from "@/app/components/dashboard/EmptyState";
+// import { EmptyState } from "@/app/components/dashboard/EmptyState";
 
 async function getData(userId: string) {
   const data = await prisma.site.findMany({
