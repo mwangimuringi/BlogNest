@@ -47,7 +47,7 @@ export default async function SiteIdRoute({
     <>
       <div className="flex w-full justify-end gap-x-4">
         <Button asChild variant="secondary">
-          <Link href="#">
+          <Link href={`/dashboard/sites/${params.siteId}/create`}>
             <Book className="size-4 mr-2" />
             View Blog
           </Link>
@@ -69,7 +69,12 @@ export default async function SiteIdRoute({
       </div>
 
      {data?.posts === undefined || data.posts.length === 0 ? (
-        <h1>empty</h1>
+        <EmptyState
+        title="You dont have any Articles created"
+        description="You currently dont have any articles. please create some so that you can see them right here"
+        buttonText="Create Article"
+        href={`/dashboard/sites/${params.siteId}/create`}
+      />
       ): (
         <h1>here is data</h1>
       )}
