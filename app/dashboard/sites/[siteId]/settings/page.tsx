@@ -1,3 +1,4 @@
+import { DeletePost } from "@/app/actions";
 import { UploadImageForm } from "@/app/components/dashboard/forms/UploadImageForm";
 import { SubmitButton } from "@/app/components/dashboard/SubmitButtons";
 import { Button } from "@/components/ui/button";
@@ -8,7 +9,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { ChevronLeft } from "lucide-react";
+import { ChevronLeft, Delete } from "lucide-react";
 import Link from "next/link";
 
 export default function SettingsRoute({
@@ -37,7 +38,11 @@ export default function SettingsRoute({
           </CardDescription>
         </CardHeader>
         <CardFooter >
+          {/* action or post request and not get request */}
+          <form action={DeletePost}> 
+          <input type = "hidden" name = "siteId" value = {params.siteId} />
           <SubmitButton variant="destructive" text="Delete Everything" />
+          </form>
         </CardFooter>
       </Card>
     </>
