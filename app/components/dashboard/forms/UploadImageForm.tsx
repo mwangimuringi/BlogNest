@@ -27,13 +27,13 @@ export function UploadImageForm({siteId}: UploadImageFormProps) {
         <CardDescription>Upload an image to your blog</CardDescription>
         <CardContent>
           {imageUrl ? (
-            <Image
-              src={`imageUrl`}
-              alt={"Uploaded Image"}
-              width={200}
-              height={200}
-              className="size-[200px] object-cover rounded-lg"
-            />
+             <Image
+             src={imageUrl}
+             alt="Uploaded Image"
+             width={200}
+             height={200}
+             className="size-[200px] object-cover rounded-lg"
+           />
           ) : (
             <UploadDropzone
               endpoint="imageUploader"

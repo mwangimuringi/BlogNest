@@ -8,12 +8,12 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
-import { FileIcon, PlusCircle } from "lucide-react";
+import { PlusCircle } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { notFound, redirect } from "next/navigation";
+import { redirect } from "next/navigation";
 import Defaultimage from "@/public/default.png";
-// import { EmptyState } from "@/app/components/dashboard/EmptyState";
+import { EmptyState } from "@/app/components/dashboard/EmptyState";
 
 async function getData(userId: string) {
   const data = await prisma.site.findMany({

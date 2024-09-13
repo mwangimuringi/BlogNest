@@ -1,23 +1,34 @@
 "use server";
 
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { redirect } from "next/navigation";
 import { parseWithZod } from "@conform-to/zod";
-import { PostSchema, siteSchema } from "./utils/zodSchemas";
+import { PostSchema, SiteCreationSchema, siteSchema } from "./utils/zodSchemas";
 import prisma from "./utils/db";
-import { request } from "https";
 import { requireUser } from "./utils/requireUser";
 
 export async function CreateSiteAction(prevState: any, formData: FormData) {
   const user = await requireUser();
 
-  const submission = await parseWithZod(formData, {
-    schema: siteSchema,
+   // Allow creating a site
+   const submission = await parseWithZod(formData, {
+    schema: SiteCreationSchema({
+      async isSubdirectoryUnique() {
+        const exisitngSubDirectory = await prisma.site.findUnique({
+          where: {
+            subdirectory: formData.get("subdirectory") as string,
+          },
+        });
+        return !exisitngSubDirectory;
+      },
+    }),
+    async: true,
   });
 
+ 
   if (submission.status !== "success") {
     return submission.reply();
   }
+
 
   const response = await prisma.site.create({
     data: {
@@ -89,7 +100,7 @@ export async function DeletePost(formData: FormData) {
   const data = await prisma.post.delete({
     where: {
       userId: user.id,
-     id:  formData.get("articleId") as string,
+      id: formData.get("articleId") as string,
     },
   });
 

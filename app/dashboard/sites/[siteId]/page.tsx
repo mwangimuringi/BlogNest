@@ -1,3 +1,5 @@
+
+import { EmptyState } from "@/app/components/dashboard/EmptyState";
 import prisma from "@/app/utils/db";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -94,9 +96,9 @@ export default async function SiteIdRoute({
 
       {data?.posts === undefined || data.posts.length === 0 ? (
         <EmptyState
-          title="You dont have any Articles created"
-          description="You currently dont have any articles. please create some so that you can see them right here"
-          buttonText="Create Article"
+         title = "You don't have any articles yet"
+         description="You don't have any articles yet. Create one now and see it here."
+         buttonText="Create Article"
           href={`/dashboard/sites/${params.siteId}/create`}
         />
       ) : (
