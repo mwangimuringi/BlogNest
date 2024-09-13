@@ -1,5 +1,5 @@
-import { conformZodMessage } from "@conform-to/zod";
 import { z } from "zod";
+import { conformZodMessage } from "@conform-to/zod";
 
 export const siteSchema = z.object({
   name: z.string().min(1).max(35),
@@ -34,21 +34,20 @@ export function SiteCreationSchema(options?: {
               message: conformZodMessage.VALIDATION_UNDEFINED,
               fatal: true,
             });
-            return false;
+            return;
           }
+
           return options.isSubdirectoryUnique().then((isUnique) => {
             if (!isUnique) {
               ctx.addIssue({
                 code: "custom",
                 message: "Subdirectory is already taken...",
-                fatal: true,
               });
-              return false;
             }
           });
         })
       ),
-      name: z.string().min(1).max(35),
-      description: z.string().min(1).max(150),    
+    name: z.string().min(1).max(35),
+    description: z.string().min(1).max(150),
   });
 }
