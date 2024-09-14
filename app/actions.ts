@@ -5,12 +5,13 @@ import { parseWithZod } from "@conform-to/zod";
 import { PostSchema, SiteCreationSchema, siteSchema } from "./utils/zodSchemas";
 import prisma from "./utils/db";
 import { requireUser } from "./utils/requireUser";
+import { stripe } from "./utils/stripe";
 
 export async function CreateSiteAction(prevState: any, formData: FormData) {
   const user = await requireUser();
 
-   // Allow creating a site
-   const submission = await parseWithZod(formData, {
+  // Allow creating a site
+  const submission = await parseWithZod(formData, {
     schema: SiteCreationSchema({
       async isSubdirectoryUnique() {
         const exisitngSubDirectory = await prisma.site.findUnique({
@@ -24,11 +25,9 @@ export async function CreateSiteAction(prevState: any, formData: FormData) {
     async: true,
   });
 
- 
   if (submission.status !== "success") {
     return submission.reply();
   }
-
 
   const response = await prisma.site.create({
     data: {
@@ -96,7 +95,7 @@ export async function EditPostAction(prevState: any, formData: FormData) {
 
 export async function DeletePost(formData: FormData) {
   const user = await requireUser();
-    //mutations
+  //mutations
   const data = await prisma.post.delete({
     where: {
       userId: user.id,
@@ -108,18 +107,54 @@ export async function DeletePost(formData: FormData) {
 }
 
 export async function UpdateImage(formData: FormData) {
-const user = await requireUser();
+  const user = await requireUser();
 
-const data = await prisma.site.update({
-  where: {
-    userId: user.id,
-    id: formData.get("siteId") as string,
-  },
-  data: {
-    imageUrl: formData.get("imageUrl") as string,
-  },
-});
+  const data = await prisma.site.update({
+    where: {
+      userId: user.id,
+      id: formData.get("siteId") as string,
+    },
+    data: {
+      imageUrl: formData.get("imageUrl") as string,
+    },
+  });
 
-return redirect(`/dashboard/sites/${formData.get("siteId")}`);
+  return redirect(`/dashboard/sites/${formData.get("siteId")}`);
 }
 
+// export async function CreateSubscription(prevState: any, formData: FormData) {
+//   const user = await requireUser();
+
+//   let stripeUserId = await prisma.user.findUnique({
+//     where: {
+//       id: user.id,
+//     },
+//     select: {
+//       customerId: true,
+//       email: true,
+//       firstName: true,
+//     },
+//   });
+
+//   if (!stripeUserId?.customerId) {
+//     const stripeCustomer = await stripe.customers.create({
+//       email: stripeUserId?.email,
+//       name: stripeUserId?.firstName,
+//     });
+
+//     stripeUserId = await prisma.user.update({
+//       where: {
+//         id: user.id,
+//       },
+//       data: {
+//         customerId: stripeCustomer.id,
+//       },
+//     });
+//   }
+
+//   const session = await stripe.checkout.sessions.create({
+//     customer: stripeUserId.customerId as string,
+//     mode: "subscription",
+//     billing_address_collection: "auto",
+//   })
+// }
