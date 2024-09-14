@@ -1,5 +1,9 @@
- // This is your Prisma schema file,
+// This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
 generator client {
   provider = "prisma-client-js"
 }
@@ -11,33 +15,32 @@ datasource db {
 }
 
 model User {
-  id           String @id @unique
+  id           String  @id @unique
   email        String
   firstName    String
   lastName     String
   profileImage String
+  customerId   String? @unique
 
-  createaAt DateTime @default(now())
+  createdAt DateTime @default(now())
 
-  site Site[] 
-   posts  Post[]
+  Site  Site[]
+  posts Post[]
 }
 
 model Site {
   id           String   @id @default(uuid())
   name         String
   description  String
-  subdirectory String
+  subdirectory String   @unique
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
   imageUrl String?
-
-  User User?  @relation(fields: [userId], references: [id])
+  User     User?   @relation(fields: [userId], references: [id])
   userId   String?
-  posts  Post[]
+  posts    Post[]
 }
-
 
 model Post {
   id String @id @default(uuid())
@@ -54,18 +57,4 @@ model Post {
   userId    String?
   Site      Site?    @relation(fields: [siteId], references: [id], onDelete: Cascade)
   siteId    String?
-}
-
-
-model Subscription {
-  stripeSubscriptionId String   @id @unique
-  interval             String
-  status               String
-  planId               String
-  currentPeriodStart   Int
-  currentPeriodEnd     Int
-  createdAt            DateTime @default(now())
-  updatedAt            DateTime @updatedAt
-
-  userId String? @unique
 }
