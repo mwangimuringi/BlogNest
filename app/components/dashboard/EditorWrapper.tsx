@@ -9,9 +9,9 @@ import {
   EditorRoot,
   JSONContent,
 } from "novel";
-import { defaultExtensions } from "./Extensions";
-import { handleCommandNavigation } from "novel/extensions";
 import { slashCommand, suggestionItems } from "./SlashCommand";
+import { handleCommandNavigation } from "novel/extensions";
+import { defaultExtensions } from "./Extensions";
 
 interface EditorProps {
   initialValue?: JSONContent;

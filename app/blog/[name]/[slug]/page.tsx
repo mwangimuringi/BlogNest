@@ -17,6 +17,7 @@ export async function getData(slug: string) {
       title: true,
       smallDescription: true,
       image: true,
+      createdAt: true,
     },
   });
 
@@ -50,7 +51,9 @@ export default async function BlogPostPage({
       <div className="flex flex-col items-center justify-center mb-10">
         <div className="m-auto w-full text-center md:w-7/12">
           <p className="m-auto my-5 w-10/12 text-sm font-light text-muted-foreground md:text-base">
-            16 apr 2024
+            {new Intl.DateTimeFormat('en-US', {
+                dateStyle: 'medium',
+            }).format(new Date(data.createdAt))}
           </p>
           <h1 className="text-3xl font-bold tracking-tight md:text-5xl">
             {data.title}

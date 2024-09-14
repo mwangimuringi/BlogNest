@@ -1,4 +1,4 @@
-"ise client";
+"use client";
 
 import { CreatePostAction } from "@/app/actions";
 import TailwindEditor from "@/app/components/dashboard/EditorWrapper";
