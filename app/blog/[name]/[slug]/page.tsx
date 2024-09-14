@@ -1,9 +1,11 @@
+import { RenderArticle } from "@/app/components/dashboard/RenderArticle";
 import prisma from "@/app/utils/db";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { JSONContent } from "novel";
 
 export async function getData(slug: string) {
   const data = await prisma.post.findUnique({
@@ -68,6 +70,8 @@ export default async function BlogPostPage({
           priority 
         />
       </div>
+
+      <RenderArticle json={data.articleContent as JSONContent} />  
     </>
   );
 }
