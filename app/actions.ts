@@ -10,35 +10,87 @@ import { stripe } from "./utils/stripe";
 export async function CreateSiteAction(prevState: any, formData: FormData) {
   const user = await requireUser();
 
-  // Allow creating a site
-  const submission = await parseWithZod(formData, {
-    schema: SiteCreationSchema({
-      async isSubdirectoryUnique() {
-        const exisitngSubDirectory = await prisma.site.findUnique({
-          where: {
-            subdirectory: formData.get("subdirectory") as string,
-          },
-        });
-        return !exisitngSubDirectory;
+  const [subStatus, sites] = await Promise.all([
+    prisma.subscription.findUnique({
+      where: {
+        userId: user.id,
+      },
+      select: {
+        status: true,
       },
     }),
-    async: true,
-  });
+    prisma.site.findMany({
+      where: {
+        userId: user.id,
+      },
+    }),
+  ]);
 
-  if (submission.status !== "success") {
-    return submission.reply();
+  if (!subStatus || subStatus.status !== "active") {
+    if (sites.length < 1) {
+      // Allow creating a site
+      const submission = await parseWithZod(formData, {
+        schema: SiteCreationSchema({
+          async isSubdirectoryUnique() {
+            const existingSubDirectory = await prisma.site.findUnique({
+              where: {
+                subdirectory: formData.get("subdirectory") as string,
+              },
+            });
+            return !existingSubDirectory;
+          },
+        }),
+        async: true,
+      });
+
+      if (submission.status !== "success") {
+        return submission.reply();
+      }
+
+      const response = await prisma.site.create({
+        data: {
+          description: submission.value.description,
+          name: submission.value.name,
+          subdirectory: submission.value.subdirectory,
+          userId: user.id,
+        },
+      });
+
+      return redirect("/dashboard/sites");
+    } else {
+      // user alredy has one site dont allow
+      return redirect("/dashboard/pricing");
+    }
+  } else if (subStatus.status === "active") {
+    // User has a active plan he can create sites...
+    const submission = await parseWithZod(formData, {
+      schema: SiteCreationSchema({
+        async isSubdirectoryUnique() {
+          const existingSubDirectory = await prisma.site.findUnique({
+            where: {
+              subdirectory: formData.get("subdirectory") as string,
+            },
+          });
+          return !existingSubDirectory;
+        },
+      }),
+      async: true,
+    });
+
+    if (submission.status !== "success") {
+      return submission.reply();
+    }
+
+    const response = await prisma.site.create({
+      data: {
+        description: submission.value.description,
+        name: submission.value.name,
+        subdirectory: submission.value.subdirectory,
+        userId: user.id,
+      },
+    });
+    return redirect("/dashboard/sites");
   }
-
-  const response = await prisma.site.create({
-    data: {
-      description: submission.value.description,
-      name: submission.value.name,
-      subdirectory: submission.value.subdirectory,
-      userId: user.id,
-    },
-  });
-
-  return redirect("/dashboard/sites");
 }
 
 export async function CreatePostAction(prevState: any, formData: FormData) {
@@ -64,15 +116,17 @@ export async function CreatePostAction(prevState: any, formData: FormData) {
     },
   });
 
-  return redirect(`/dashboard/sites`);
+  return redirect(`/dashboard/sites/${formData.get("siteId")}`);
 }
 
-export async function EditPostAction(prevState: any, formData: FormData) {
+
+export async function EditPostActions(prevState: any, formData: FormData) {
   const user = await requireUser();
-  //compare form data with zod
+  //compare form data with zod schema
   const submission = parseWithZod(formData, {
     schema: PostSchema,
   });
+
   if (submission.status !== "success") {
     return submission.reply();
   }
@@ -90,12 +144,13 @@ export async function EditPostAction(prevState: any, formData: FormData) {
       image: submission.value.coverImage,
     },
   });
+
   return redirect(`/dashboard/sites/${formData.get("siteId")}`);
 }
 
 export async function DeletePost(formData: FormData) {
   const user = await requireUser();
-  //mutations
+    //mutations
   const data = await prisma.post.delete({
     where: {
       userId: user.id,
@@ -122,7 +177,7 @@ export async function UpdateImage(formData: FormData) {
   return redirect(`/dashboard/sites/${formData.get("siteId")}`);
 }
 
-export async function CreateSubscription( formData: FormData) {
+export async function CreateSubscription(formData: FormData) {
   const user = await requireUser();
 
   let stripeUserId = await prisma.user.findUnique({
@@ -156,14 +211,14 @@ export async function CreateSubscription( formData: FormData) {
     customer: stripeUserId.customerId as string,
     mode: "subscription",
     billing_address_collection: "auto",
-    payment_method_types: ['card'],
-    line_items: [{price: process.env.STRIPE_PRICE_ID, quantity: 1}],
+    payment_method_types: ["card"],
+    line_items: [{ price: process.env.STRIPE_PRICE_ID, quantity: 1 }],
     customer_update: {
       address: "auto",
-      name: "auto"
+      name: "auto",
     },
-    success_url:'localhost:3000/dashboard/payment/success',
-    cancel_url:'localhost:3000/dashboard/payment/cancelled',
+    success_url: "localhost:3000/dashboard/payment/success",
+    cancel_url: "localhost:3000/dashboard/payment/cancelled",
   });
 
   return redirect(session.url as string);
