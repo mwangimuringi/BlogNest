@@ -12,7 +12,7 @@ import { SubmitButton } from "../dashboard/SubmitButtons";
 import Link from "next/link";
 import { CreateSubscription } from "@/app/actions";
 
-interface iAppProps {
+interface PricingProps {
   id: number;
   cardTitle: string;
   cardDescription: string;
@@ -20,7 +20,7 @@ interface iAppProps {
   benefits: string[];
 }
 
-export const PricingPlans: iAppProps[] = [
+export const PricingPlans: PricingProps[] = [
   {
     id: 0,
     cardTitle: "Freelancer",
