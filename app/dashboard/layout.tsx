@@ -6,9 +6,14 @@ import { ReactNode } from "react";
 import { DashboardItems } from "../components/dashboard/DashboarItems";
 import { Home, Globe, DollarSign, CircleUser } from "lucide-react";
 import { ThemeToggle } from "../components/dashboard/ThemeToggle";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-import {LogoutLink} from "@kinde-oss/kinde-auth-nextjs/components"
+import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
 
 export const navLinks = [
   {
@@ -27,9 +32,9 @@ export const navLinks = [
     icon: DollarSign,
   },
 ];
-export default function DashboardLayout({children} : {children: ReactNode}){
-    return (
-        <section className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
+export default function DashboardLayout({ children }: { children: ReactNode }) {
+  return (
+    <section className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
       <div className="hidden border-r bg-muted/40 md:block">
         <div className="flex h-full max-h-screen flex-col gap-2">
           <div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
@@ -40,7 +45,7 @@ export default function DashboardLayout({children} : {children: ReactNode}){
               </h3>
             </Link>
           </div>
-                         {/* sidebar */}
+          {/* sidebar */}
           <div className="flex-1">
             <nav className="grid items-start px-2  font-medium lg:px-4">
               <DashboardItems />
@@ -77,5 +82,5 @@ export default function DashboardLayout({children} : {children: ReactNode}){
         </main>
       </div>
     </section>
-    )
+  );
 }

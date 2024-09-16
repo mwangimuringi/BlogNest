@@ -120,6 +120,7 @@ export function Hero() {
             <Image
               src={HeroImage}
               alt="Hero Image"
+              priority
               className="relative object-cover w-full border rounded-lg shadow-2xl lg:rounded-2xl"
             />
           </div>

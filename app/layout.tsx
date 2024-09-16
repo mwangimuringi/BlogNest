@@ -25,7 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.className} ${geistMono.className}`}>
+      <body className={`font-sans`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
