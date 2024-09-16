@@ -24,7 +24,8 @@ import { useFormState } from "react-dom";
 import { useForm } from "@conform-to/react";
 import { PostSchema } from "@/app/utils/zodSchemas";
 import slugify from "react-slugify";
-import { EditPostAction} from "@/app/actions";
+import { EditPostActions } from "@/app/actions";
+
 
 interface iAppProps {
   data: {
@@ -45,7 +46,7 @@ export function EditArticleForm({data, siteId}: iAppProps) {
   const [title, setTitle] = useState<undefined | string>(data.title);
 
   //getting data in frontend from server action
-  const [lastResult, action] = useFormState(EditPostAction, undefined);
+  const [lastResult, action] = useFormState(EditPostActions, undefined);
   const [form, fields] = useForm({
     lastResult,
 
