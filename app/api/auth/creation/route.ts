@@ -33,7 +33,7 @@ export async function GET() {
     // Redirect based on the environment
     return NextResponse.redirect(
       process.env.NODE_ENV === "production"
-        ? "https://blog-nest-eight.vercel.app/dashboard"
+        ? "https://blog-nest-navy.vercel.app/dashboard"
         : "http://localhost:3000/dashboard"
     );
   } catch (error) {
