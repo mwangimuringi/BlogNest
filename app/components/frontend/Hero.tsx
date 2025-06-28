@@ -58,6 +58,8 @@ export function Hero() {
               <RegisterLink>
                 <Button>Try it free</Button>
               </RegisterLink>
+
+              
             </div>
           </div>
           <div className="relative items-center w-full py-12 mx-auto mt-12">
