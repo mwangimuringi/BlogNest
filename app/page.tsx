@@ -15,6 +15,7 @@ export default async function Home() {
   return (
    <div className="max-w-7xl mx-auto px-4 sm:px-8 mb-24">
       <Hero />
+      <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3"></div>
       <Logos />
       <Features />
       <PricingTable />
