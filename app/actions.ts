@@ -122,6 +122,11 @@ export async function CreatePostAction(prevState: any, formData: FormData) {
 
 export async function EditPostActions(prevState: any, formData: FormData) {
   const user = await requireUser();
+  const site = await prisma.site.findUnique({
+    where: {
+      id: formData.get("siteId") as string,
+    },
+  });
   //compare form data with zod schema
   const submission = parseWithZod(formData, {
     schema: PostSchema,
