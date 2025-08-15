@@ -57,7 +57,6 @@ export function Hero() {
               </LoginLink>
               <RegisterLink>
                 <Button>Try it free</Button>
-  
               </RegisterLink>
             </div>
           </div>
