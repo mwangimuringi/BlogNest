@@ -58,7 +58,6 @@ export function Hero() {
               <RegisterLink>
                 <Button>Try it free</Button>
                 <span className="text-sm font-medium text-muted-foreground">
-                  <span className="text-muted-foreground"></span>
                 </span>
               </RegisterLink>
             </div>
