@@ -57,8 +57,6 @@ export default async function PricingPage() {
             Click on the button below, this will give you the opportunity to
             change your payment details and view your statement at the same
             time.
-            <br />
-            <br />
           </CardDescription>
         </CardHeader>
         <CardContent>
