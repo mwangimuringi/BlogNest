@@ -122,7 +122,6 @@ export async function CreatePostAction(prevState: any, formData: FormData) {
 
 export async function EditPostActions(prevState: any, formData: FormData) {
   const user = await requireUser();
-  
   //compare form data with zod schema
   const submission = parseWithZod(formData, {
     schema: PostSchema,
