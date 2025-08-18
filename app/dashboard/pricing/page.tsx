@@ -46,6 +46,8 @@ export default async function PricingPage() {
     });
 
     return redirect(session.url);
+    // return redirect(session.url);
+    // return redirect("/dashboard/payment/success");
   }
 
   if (data?.status === "active") {
