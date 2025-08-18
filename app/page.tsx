@@ -13,14 +13,11 @@ export default async function Home() {
     return redirect("/dashboard");
   }
   return (
-   <div className="max-w-7xl mx-auto px-4 sm:px-8 mb-24">
+    <div className="max-w-7xl mx-auto px-4 sm:px-8 mb-24">
       <Hero />
-      <div className="mt-12 mb-24">
-         <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
-            The best blogging platform for your next project
       <Logos />
       <Features />
       <PricingTable />
-   </div>
+    </div>
   );
 }
