@@ -57,6 +57,11 @@ export function Hero() {
                 <span className="text-sm text-muted-foreground">
                   or
                   <br />
+                  <span className="text-primary">
+                    <Link href="/auth/register">
+                      <span className="font-medium">sign up</span>
+                    </Link>
+                  </span>
                 </span>
               </LoginLink>
               <RegisterLink>
