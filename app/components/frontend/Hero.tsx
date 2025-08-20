@@ -54,10 +54,6 @@ export function Hero() {
             <div className="flex items-center justify-center gap-x-5 mt-5">
               <LoginLink>
                 <Button variant="secondary">Sign in</Button>\
-                <span className="text-sm text-muted-foreground">
-                  or
-                  <br />
-                </span>
               </LoginLink>
               <RegisterLink>
                 <Button>Try it free</Button>
