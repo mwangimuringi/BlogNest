@@ -65,9 +65,6 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                   variant="secondary"
                   size="icon"
                   className="rounded-full"
-                  aria-label="User menu"
-                  title="User menu"
-                  data-testid="user-menu"
                 >
                   <CircleUser className="h-5 w-5" />
                 </Button>
