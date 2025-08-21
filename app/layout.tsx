@@ -39,6 +39,21 @@ export default function RootLayout({
               :root {
                 --font-geist-sans: ${geistSans.style.fontFamily};
                 --font-geist-mono: ${geistMono.style.fontFamily};
+                --font-primary: var(--font-geist-sans);
+                --font-secondary: var(--font-geist-mono);
+                --color-primary: #03ffe0;
+                --color-secondary: #4c65e4;
+                --color-accent: #7c87f8;
+                --color-muted: #e0e0e0;
+                --color-muted-foreground: #646464;
+                --color-accent-foreground: #ffffff;
+                --color-primary-foreground: #ffffff;
+                --color-secondary-foreground: #ffffff;
+                --background-primary: #ffffff;
+                --background-secondary: #f9fafb;
+                --background-accent: #ffffff;
+                --background-muted: #f3f4f6;
+                --background-accent: #ffffff;
               }
             `}
           </style>
