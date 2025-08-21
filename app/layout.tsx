@@ -34,7 +34,14 @@ export default function RootLayout({
         >
           {children}
           <Toaster richColors closeButton />
-          <style jsx global></style>
+          <style jsx global>
+            {`
+              :root {
+                --font-geist-sans: ${geistSans.style.fontFamily};
+                --font-geist-mono: ${geistMono.style.fontFamily};
+              }
+            `}
+          </style>
         </ThemeProvider>
       </body>
     </html>
