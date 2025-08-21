@@ -80,12 +80,6 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
         <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
           {children}
         </main>
-
-        <footer className="flex h-14 items-center border-t bg-muted/40 px-4 lg:h-[60px] lg:px-6">
-          <div className="ml-auto flex items-center gap-x-5">
-            <ThemeToggle = [] />
-          </div>
-        </footer>
       </div>
     </section>
   );
