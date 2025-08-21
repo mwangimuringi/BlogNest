@@ -34,6 +34,7 @@ export default function RootLayout({
         >
           {children}
           <Toaster richColors closeButton />
+          <style jsx global></style>
         </ThemeProvider>
       </body>
     </html>
