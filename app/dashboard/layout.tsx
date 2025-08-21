@@ -79,8 +79,8 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
         </header>
         <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
           <div className="mb-4 flex items-center justify-between">
+            Current Site:{" "}
             
-          </div>
           {children}
         </main>
       </div>
