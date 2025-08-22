@@ -18,6 +18,8 @@ async function getData(slug: string) {
       smallDescription: true,
       image: true,
       createdAt: true,
+      slug: true,
+      name: true,
     },
   });
 
