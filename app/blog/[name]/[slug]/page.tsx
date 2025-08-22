@@ -11,6 +11,7 @@ async function getData(slug: string) {
   const data = await prisma.post.findUnique({
     where: {
       slug: slug,
+      published: true,
     },
     select: {
       articleContent: true,
