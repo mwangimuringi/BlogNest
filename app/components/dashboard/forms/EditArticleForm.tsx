@@ -47,7 +47,6 @@ export function EditArticleForm({data, siteId}: iAppProps) {
 
   //getting data in frontend from server action
   const [lastResult, action] = useFormState(EditPostActions, undefined);
-  const [form, fields] = useForm<FormData>({
   const [form, fields] = useForm({
     lastResult,
 
