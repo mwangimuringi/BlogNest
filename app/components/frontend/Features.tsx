@@ -56,7 +56,7 @@ export function Features() {
               <p className="mt-2 text-sm text-muted-foreground leading-snug">
                 {feature.description}
                 <span className="block mt-2 text-primary">
-                  
+                  <h1>Get started</h1>
                 </span>
               </p>
             </div>
