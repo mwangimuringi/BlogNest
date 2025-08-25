@@ -55,9 +55,6 @@ export function Features() {
               </div>
               <p className="mt-2 text-sm text-muted-foreground leading-snug">
                 {feature.description}
-                <a
-                  href="https://github.com/blognest/blognest"
-                  className="mt-2 text-sm text-primary"
               </p>
             </div>
           ))}
