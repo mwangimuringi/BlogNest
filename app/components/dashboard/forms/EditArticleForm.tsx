@@ -52,7 +52,6 @@ export function EditArticleForm({data, siteId}: iAppProps) {
 
     onValidate({ formData }) {
       return parseWithZod(formData, {
-        schema: PostSchema
         schema: PostSchema,
       });
     },
