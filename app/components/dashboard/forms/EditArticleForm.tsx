@@ -50,7 +50,6 @@ export function EditArticleForm({data, siteId}: iAppProps) {
   const [form, fields] = useForm({
     lastResult,
 
-    
     onValidate({ formData }) {
       return parseWithZod(formData, {
         schema: PostSchema,
