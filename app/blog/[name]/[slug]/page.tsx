@@ -22,6 +22,7 @@ async function getData(slug: string) {
   });
 
   if (!data) {
+    console.log("data not found");
     return notFound();
   }
 
