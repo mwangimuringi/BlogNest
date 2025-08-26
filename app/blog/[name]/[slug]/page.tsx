@@ -22,7 +22,6 @@ async function getData(slug: string) {
   });
 
   if (!data) {
-    
     return notFound();
   }
 
