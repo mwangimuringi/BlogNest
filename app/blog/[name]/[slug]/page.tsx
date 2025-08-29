@@ -19,6 +19,8 @@ async function getData(slug: string) {
       image: true,
       createdAt: true,
     },
+
+    
   });
 
   if (!data) {
