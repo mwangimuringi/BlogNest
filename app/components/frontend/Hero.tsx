@@ -57,6 +57,9 @@ export function Hero() {
               </LoginLink>
               <RegisterLink>
                 <Button>Try it free</Button>
+                <span className="text-sm font-medium text-muted-foreground">
+                  No credit card required
+                </span>
               </RegisterLink>
             </div>
           </div>
