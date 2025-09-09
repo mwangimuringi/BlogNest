@@ -79,6 +79,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
         </header>
         <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
           {children}
+          <div className="mt-auto flex items-center justify-end gap-4"></div>
         </main>
       </div>
     </section>
