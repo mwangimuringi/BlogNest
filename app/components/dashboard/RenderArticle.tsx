@@ -36,6 +36,7 @@ export const RenderArticle = ({ json }: { json: JSONContent }) => {
       OrderList,
       Bold,
       HardBreak,
+      
     ]);
   }, [json]);
   return (
