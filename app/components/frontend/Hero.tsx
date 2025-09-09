@@ -67,6 +67,7 @@ export function Hero() {
               viewBox="0 0 400 400"
               height="100%"
               width="100%"
+              
               xmlns="http://www.w3.org/2000/svg"
             >
               <g clipPath="url(#clip0_10_20)">
